@@ -1,9 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\widgets\Pjax;
 use app\models\Store;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\DeviceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -29,11 +31,22 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'serial',
-            'created_at',
 
             [
                 'attribute' => 'store_id',
-                'filter' => Store::find()->select(['name'])->indexBy('id')->column(),
+                'value' => function($model) {
+                    return empty($model->store) ? null : $model->store->name;
+                },
+                'filter' => ArrayHelper::map(Store::find()->asArray()->all(), 'id', 'name'),
+                'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'options' => ['prompt' => ''],
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => ['date', 'php:D d, M Y. H:i']
             ],
 
             ['class' => 'yii\grid\ActionColumn'],

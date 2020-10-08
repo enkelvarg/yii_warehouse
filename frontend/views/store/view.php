@@ -2,23 +2,19 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use app\models\Device;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Store */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Stores', 'url' => ['/store']];
-$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
 ?>
 <div class="store-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
+    <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
+    <p class="text-center">
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -28,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -39,8 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => ['date', 'php:D d, M Y']
             ],
         ],
-    ]) ?>
-
-
-
+    ]) ;
+    ?>
+    <div>
+        <h3 class="text-center">Stored Devices:</h3>
+        <?php foreach($model->devices as $device): ?>
+            <div class="text-center">
+                <h4><?= Html::a($device->serial, ['/device/view/', 'id' => $device->id], ['target'=>'_blank']) ?></h4>
+            </div>
+        <?php endforeach;?>
+    </div>
 </div>

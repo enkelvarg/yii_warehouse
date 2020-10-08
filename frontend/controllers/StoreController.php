@@ -63,7 +63,7 @@ class StoreController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -121,7 +121,7 @@ class StoreController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
+        /**
      * Finds the Store model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

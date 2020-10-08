@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\grid\GridView;
 use yii\widgets\Pjax;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
@@ -9,7 +8,7 @@ use yii\bootstrap\Modal;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\StoreSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
+/* @var $model app\models\Store */
 
 $this->title = 'Stores';
 $this->params['breadcrumbs'][] = $this->title;
@@ -24,17 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <?php
-        Modal::begin([
-            'header' => 'Devices in store',
-            'id' => 'device-modal',
-            'size' => 'modal-lg',
-        ]);
-
-        echo "<div id='modalContent'></div>";
-
-        Modal::end();
-    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -46,7 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'name',
                 'format' => 'raw',
                 'value' => function ($model) {
-                    return Html::a($model->name, ['/store/view/', 'id' => $model->id]);
+                    return Html::a($model->name, ['/store/view/', 'id' => $model->id],[
+                       'id' => 'device-view-link',
+                       'title' => Yii::t('yii', 'View Store'),
+                       'data' => [
+                           'target' => '#device-modal',
+                           'toggle' => 'modal',
+                           'backdrop' => 'static',
+                       ]
+                    ]);
                 }
             ],
 
@@ -58,6 +54,26 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+    <?php
+    Modal::begin([
+        'header' => 'Stored Devices',
+        'id' => 'device-modal',
+        'size' => 'modal-lg',
+    ]);
+    Modal::end()
+    ?>
+
+    <?php $this->registerJs(
+        "$('.device-view-link').click(function() {
+           function (data) {
+               $('.modal-body').html(data);
+               $('#device-modal').modal();
+           }  
+        );
+        });"
+    ); ?>
+
     <?php Pjax::end(); ?>
+
 
 </div>
