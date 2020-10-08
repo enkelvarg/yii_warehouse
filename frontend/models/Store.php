@@ -45,6 +45,7 @@ class Store extends ActiveRecord
             [['created_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
+            [['name'], 'required'],
         ];
     }
 
@@ -55,7 +56,7 @@ class Store extends ActiveRecord
     {
         return [
             'name' => 'Name',
-            'created_at' => 'Created At',
+            'created_at' => 'Opened',
         ];
     }
 }

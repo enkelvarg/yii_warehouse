@@ -29,18 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            [
-                'attribute' => 'serial',
-                'label' => 'Serial Number',
-            ],
+                'serial',
             [
                 'attribute' => 'store',
-                'label' => 'Store',
                 'filter' => Store::find()->select(['name'])->indexBy('name')->column(),
             ],
             [
                 'attribute' => 'created_at',
-                'label' => 'Added',
                 'format' => ['date', 'php:D d, M Y. H:i']
             ],
 

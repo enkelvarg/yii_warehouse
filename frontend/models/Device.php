@@ -48,6 +48,7 @@ class Device extends ActiveRecord
             [['created_at'], 'safe'],
             [['store'], 'string', 'max' => 255],
             [['serial'], 'unique'],
+            [['serial'], 'required'],
         ];
     }
 
@@ -57,9 +58,9 @@ class Device extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'serial' => 'Serial',
+            'serial' => 'Serial Number',
             'store' => 'Store',
-            'created_at' => 'Created At',
+            'created_at' => 'Added',
         ];
     }
 }

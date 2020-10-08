@@ -44,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'attribute' => 'name',
-                'label' => 'Name',
                 'format' => 'raw',
                 'value' => function ($model) {
                     return Html::a($model->name, ['/store/view/', 'id' => $model->id]);
@@ -53,7 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'attribute' => 'created_at',
-                'label' => 'Opened',
                 'format' => ['date', 'php:D d, M Y']
             ],
             ['class' => 'yii\grid\ActionColumn'],
