@@ -3,18 +3,21 @@
 namespace app\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\db\Expression;
 
 /**
  * This is the model class for table "device".
  *
- * @property int|null $serial
- * @property string|null $store
+ * @property int $serial
  * @property string|null $created_at
+ * @property int $id
+ * @property int|null $store_id
+ *
+ * @property Store $store
  */
-class Device extends ActiveRecord
+class Device extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -24,15 +27,11 @@ class Device extends ActiveRecord
         return 'device';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-
     public function behaviors()
     {
         return [
             'timestamp' => [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
                 ],
@@ -41,14 +40,16 @@ class Device extends ActiveRecord
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['serial'], 'integer'],
-            [['created_at'], 'safe'],
-            [['store'], 'string', 'max' => 255],
-            [['serial'], 'unique'],
             [['serial'], 'required'],
+            [['serial', 'store_id'], 'integer'],
+            [['created_at'], 'safe'],
+            [['store_id'], 'exist', 'skipOnError' => true, 'targetClass' => Store::class, 'targetAttribute' => ['store_id' => 'id']],
         ];
     }
 
@@ -58,9 +59,20 @@ class Device extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'serial' => 'Serial Number',
-            'store' => 'Store',
-            'created_at' => 'Added',
+            'serial' => 'Serial',
+            'created_at' => 'Created At',
+            'id' => 'ID',
+            'store_id' => 'Store ID',
         ];
+    }
+
+    /**
+     * Gets query for [[Store]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStore()
+    {
+        return $this->hasOne(Store::class, ['id' => 'store_id']);
     }
 }

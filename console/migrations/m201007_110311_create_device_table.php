@@ -13,7 +13,7 @@ class m201007_110311_create_device_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%device}}', [
-            'serial' => $this->primaryKey(),
+            'serial' => $this->integer()->unique(),
             'store' => $this->string(),
             'created_at' => $this->dateTime()
         ]);

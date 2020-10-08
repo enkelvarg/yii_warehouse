@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m201007_125157_add_id_column_to_store_table
  */
-class m201007_125157_add_id_column_to_storetable extends Migration
+class m201007_125157_add_id_column_to_store_table extends Migration
 {
     /**
      * {@inheritdoc}

@@ -3,17 +3,20 @@
 namespace app\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\db\Expression;
 
 /**
- * This is the model class for table "stores".
+ * This is the model class for table "store".
  *
- * @property string|null $name
+ * @property string $name
  * @property string|null $created_at
+ * @property int $id
+ *
+ * @property Device[] $devices
  */
-class Store extends ActiveRecord
+class Store extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -27,7 +30,7 @@ class Store extends ActiveRecord
     {
         return [
             'timestamp' => [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
                 ],
@@ -42,10 +45,10 @@ class Store extends ActiveRecord
     public function rules()
     {
         return [
+            [['name'], 'required'],
             [['created_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
-            [['name'], 'required'],
         ];
     }
 
@@ -56,7 +59,18 @@ class Store extends ActiveRecord
     {
         return [
             'name' => 'Name',
-            'created_at' => 'Opened',
+            'created_at' => 'Created At',
+            'id' => 'ID',
         ];
+    }
+
+    /**
+     * Gets query for [[Devices]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDevices()
+    {
+        return $this->hasMany(Device::class, ['store_id' => 'id']);
     }
 }

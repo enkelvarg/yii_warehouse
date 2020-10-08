@@ -17,8 +17,8 @@ class DeviceSearch extends Device
     public function rules()
     {
         return [
-            [['serial'], 'integer'],
-            [['store', 'created_at'], 'safe'],
+            [['serial', 'id', 'store_id'], 'integer'],
+            [['created_at'], 'safe'],
         ];
     }
 
@@ -60,9 +60,9 @@ class DeviceSearch extends Device
         $query->andFilterWhere([
             'serial' => $this->serial,
             'created_at' => $this->created_at,
+            'id' => $this->id,
+            'store_id' => $this->store_id,
         ]);
-
-        $query->andFilterWhere(['like', 'store', $this->store]);
 
         return $dataProvider;
     }

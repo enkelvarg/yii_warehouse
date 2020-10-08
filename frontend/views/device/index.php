@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use app\models\Store;
-use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\DeviceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -21,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -29,19 +28,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-                'serial',
+            'serial',
+            'created_at',
+
             [
-                'attribute' => 'store',
-                'filter' => Store::find()->select(['name'])->indexBy('name')->column(),
-            ],
-            [
-                'attribute' => 'created_at',
-                'format' => ['date', 'php:D d, M Y. H:i']
+                'attribute' => 'store_id',
+                'filter' => Store::find()->select(['name'])->indexBy('id')->column(),
             ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
 
     <?php Pjax::end(); ?>
 

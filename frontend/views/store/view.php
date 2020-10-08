@@ -12,6 +12,7 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Stores', 'url' => ['/store']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
 ?>
 <div class="store-view">
 
@@ -39,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
+
 
 
 </div>

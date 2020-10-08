@@ -15,10 +15,11 @@ use app\models\Store;
 
     <?= $form->field($model, 'serial')->textInput() ?>
 
-    <?= $form->field($model, 'store')->dropdownList(
-        Store::find()->select(['name'])->indexBy('name')->column(),
+    <?= $form->field($model, 'store_id')->dropdownList(
+        Store::find()->select(['name'])->indexBy('id')->column(),
         ['prompt'=>'Select Store']
     ); ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
