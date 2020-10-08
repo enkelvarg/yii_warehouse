@@ -15,7 +15,7 @@ class m201007_110311_create_device_table extends Migration
         $this->createTable('{{%device}}', [
             'serial' => $this->primaryKey(),
             'store' => $this->string(),
-            'created_at' => $this->date()
+            'created_at' => $this->dateTime()
         ]);
     }
 

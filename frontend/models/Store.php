@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "stores".
@@ -11,24 +13,25 @@ use yii\db\ActiveRecord;
  * @property string|null $name
  * @property string|null $created_at
  */
-class Stores extends ActiveRecord
+class Store extends ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'stores';
+        return 'store';
     }
 
     public function behaviors()
     {
         return [
             'timestamp' => [
-                'class' => 'yii\behaviors\TimestampBehavior',
+                'class' => TimestampBehavior::className(),
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
                 ],
+                'value' => new Expression('NOW()')
             ],
         ];
     }

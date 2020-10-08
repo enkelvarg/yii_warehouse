@@ -12,9 +12,9 @@ class m201007_110331_create_stores_table extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('{{%stores}}', [
-            'name' => $this->string()->unique(),
-            'created_at' => $this->date()
+        $this->createTable('{{%store}}', [
+            'name' => $this->string()->unique()->notNull(),
+            'created_at' => $this->dateTime()
         ]);
     }
 
@@ -23,6 +23,6 @@ class m201007_110331_create_stores_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%stores}}');
+        $this->dropTable('{{%store}}');
     }
 }

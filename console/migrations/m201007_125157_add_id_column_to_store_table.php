@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Class m201007_125157_add_id_columns_to_stores_and_device
+ * Class m201007_125157_add_id_column_to_store_table
  */
-class m201007_125157_add_id_columns_to_stores_and_device extends Migration
+class m201007_125157_add_id_column_to_storetable extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->addColumn('stores', 'id', $this->primaryKey());
+        $this->addColumn('store', 'id', $this->primaryKey());
     }
 
     /**
@@ -20,7 +20,7 @@ class m201007_125157_add_id_columns_to_stores_and_device extends Migration
      */
     public function safeDown()
     {
-        $this->dropColumn('stores', 'id');
+        $this->dropColumn('store', 'id');
     }
 
     /*
@@ -32,7 +32,7 @@ class m201007_125157_add_id_columns_to_stores_and_device extends Migration
 
     public function down()
     {
-        echo "m201007_125157_add_id_columns_to_stores_and_device cannot be reverted.\n";
+        echo "m201007_125157_add_id_column_to_storetable cannot be reverted.\n";
 
         return false;
     }

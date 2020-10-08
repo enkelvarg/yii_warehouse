@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use app\models\Stores;
-use app\models\StoresSearch;
+use app\models\Store;
+use app\models\StoreSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * StoresController implements the CRUD actions for Stores model.
+ * StoreController implements the CRUD actions for Store model.
  */
-class StoresController extends Controller
+class StoreController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class StoresController extends Controller
     }
 
     /**
-     * Lists all Stores models.
+     * Lists all Store models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StoresSearch();
+        $searchModel = new StoreSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class StoresController extends Controller
     }
 
     /**
-     * Displays a single Stores model.
+     * Displays a single Store model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class StoresController extends Controller
     }
 
     /**
-     * Creates a new Stores model.
+     * Creates a new Store model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Stores();
+        $model = new Store();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->created_at = time();
@@ -77,7 +77,7 @@ class StoresController extends Controller
     }
 
     /**
-     * Updates an existing Stores model.
+     * Updates an existing Store model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -97,7 +97,7 @@ class StoresController extends Controller
     }
 
     /**
-     * Deletes an existing Stores model.
+     * Deletes an existing Store model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -111,15 +111,15 @@ class StoresController extends Controller
     }
 
     /**
-     * Finds the Stores model based on its primary key value.
+     * Finds the Store model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Stores the loaded model
+     * @return Store the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Stores::findOne($id)) !== null) {
+        if (($model = Store::findOne($id)) !== null) {
             return $model;
         }
 

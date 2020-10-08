@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\StoresSearch */
+/* @var $searchModel app\models\StoreSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Stores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="stores-index">
+<div class="store-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
