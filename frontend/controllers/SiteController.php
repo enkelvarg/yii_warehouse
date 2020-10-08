@@ -35,7 +35,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['index', 'logout', 'device', 'store'],
+                        'actions' => ['index', 'logout',],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
