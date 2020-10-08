@@ -2,12 +2,14 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Device;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Store */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Stores', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Stores', 'url' => ['/store']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -30,9 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'name',
-            'created_at',
-            'id',
+            [
+                'attribute' => 'created_at',
+                'label' => 'Opened',
+                'format' => ['date', 'php:D d, M Y']
+            ],
         ],
     ]) ?>
+
 
 </div>

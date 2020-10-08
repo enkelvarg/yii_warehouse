@@ -10,7 +10,7 @@ $this->title = 'Warehouse';
         <h1>Warehouse</h1>
 
         <a class="btn btn-lg btn-primary" href="device">Devices</a>
-        <a class="btn btn-lg btn-info" href="stores">Stores</a>
+        <a class="btn btn-lg btn-info" href="store">Stores</a>
     </div>
 
 </div>

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Store;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\DeviceSearch */
@@ -20,9 +21,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'serial') ?>
 
-    <?= $form->field($model, 'store') ?>
-
-    <?= $form->field($model, 'created_at') ?>
+    <?= $form->field($model, 'store')->dropDownList(
+        Store::find()->select(['name'])->indexBy('name')->column(),
+        ['prompt'=>'Select Store']
+        );
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

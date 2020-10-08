@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Store;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Device */
@@ -14,7 +15,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'serial')->textInput() ?>
 
-    <?= $form->field($model, 'store')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'store')->dropdownList(
+        Store::find()->select(['name'])->indexBy('name')->column(),
+        ['prompt'=>'Select Store']
+    ); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

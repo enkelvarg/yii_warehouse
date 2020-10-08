@@ -1,11 +1,15 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
 use yii\widgets\Pjax;
+use kartik\grid\GridView;
+use yii\bootstrap\Modal;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\StoreSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
 
 $this->title = 'Stores';
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,6 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php
+        Modal::begin([
+            'header' => 'Devices in store',
+            'id' => 'device-modal',
+            'size' => 'modal-lg',
+        ]);
+
+        echo "<div id='modalContent'></div>";
+
+        Modal::end();
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -27,9 +42,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'name',
-            'created_at',
+            [
+                'attribute' => 'name',
+                'label' => 'Name',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::a($model->name, ['/store/view/', 'id' => $model->id]);
+                }
+            ],
 
+            [
+                'attribute' => 'created_at',
+                'label' => 'Opened',
+                'format' => ['date', 'php:D d, M Y']
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
