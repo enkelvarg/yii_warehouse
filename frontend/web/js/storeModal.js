@@ -1,11 +1,11 @@
-function storeModal(url, title){
+function storeModal(url, id){
     id = $.ajax({
         url: url,
-        data: {id: title},
+        data: {id: id},
         type: 'GET',
         success: function (data) {
-            $('#modal').modal('show').find('#modalContent').html(data);
-            $('#modal-title').text(title);
+            $('#storeModal').modal('show').find('#modalContent').html(data);
+            $('#modal-id').text(id);
         }
     });
     return false;
@@ -13,6 +13,5 @@ function storeModal(url, title){
 
 function redirectDevice(e, event) {
     event.preventDefault();
-    $('#modal').modal('hide');
     window.open(e.getAttribute('href'));
 }

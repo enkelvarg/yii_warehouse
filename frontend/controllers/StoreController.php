@@ -64,6 +64,10 @@ class StoreController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new DeviceSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['store_id' => $id]);
+
         return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
@@ -120,17 +124,6 @@ class StoreController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    public function actionModal($id){
-        $searchModel = new DeviceSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->andWhere(['id' => $id]);
-
-        return $this->renderAjax('view', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
     }
 
         /**

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Store */
@@ -13,17 +15,7 @@ $this->title = $model->name;
 ?>
 <div class="store-view">
 
-    <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
-    <p class="text-center">
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <h2 class="text-left"><?= Html::encode($this->title) ?></h2>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -36,17 +28,40 @@ $this->title = $model->name;
         ],
     ]) ;
     ?>
-    <div>
-        <h3 class="text-center">Stored Devices:</h3>
+
+<h4>Stored Devices:</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Serial Number</th>
+            <th scope="col">Added</th>
+        </tr>
+    </thead>
+        <tbody>
         <?php foreach($model->devices as $device): ?>
-            <div class="text-center">
-                <h4><?= Html::a($device->serial, ['/device/view/', 'id' => $device->id], ['target'=>'_blank']) ?></h4>
-            </div>
+        <tr>
+            <th scope="row"><?=$device->id?></th>
+            <td><?= Html::a($device->serial, ['/device', 'DeviceSearch[serial]' => $device->serial],
+                    ['onclick' => 'redirectDevice(this, event);']
+                ) ?>
+            </td>
+            <td><?=$device->created_at?></td>
+        </tr>
+        </tbody>
         <?php endforeach;?>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-secondary" style="background-color: #9acfea;!important;" data-dismiss="modal">Close</button>
-    </div>
+ </table>
+
+    <p class="text-right">
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
 </div>
 
 

@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model)
                 {
                     return  Html::button($model->name,['class' => 'btn-link',
-                                'onclick' => 'storeModal("'.Url::to(['store/modal']).'", "'.$model->id.'")']);
+                                'onclick' => 'storeModal("'.Url::to(['store/view']).'", "'.$model->id.'")']);
                 },
             ],
 
@@ -52,12 +52,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
     Modal::begin([
-        'header' => 'Stored Devices',
-        'id' => 'modal',
+        'id' => 'storeModal',
         'size' => 'modal-lg',
-    ]);?>
-    <div class="modal-body"></div>
-    <?php
+    ]);
+    echo "<div id='modalContent'></div>";
     Modal::end()
     ?>
 
