@@ -59,7 +59,7 @@ class Store extends \yii\db\ActiveRecord
     {
         return [
             'name' => 'Name',
-            'created_at' => 'Created At',
+            'created_at' => 'Opened',
             'id' => 'ID',
         ];
     }

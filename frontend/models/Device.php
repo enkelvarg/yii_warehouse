@@ -59,10 +59,10 @@ class Device extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'serial' => 'Serial',
-            'created_at' => 'Created At',
+            'serial' => 'Serial Number',
+            'created_at' => 'Added',
             'id' => 'ID',
-            'store_id' => 'Store ID',
+            'store_id' => 'Store',
         ];
     }
 
