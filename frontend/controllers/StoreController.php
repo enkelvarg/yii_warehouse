@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use app\models\DeviceSearch;
 
 /**
  * StoreController implements the CRUD actions for Store model.
@@ -25,7 +26,7 @@ class StoreController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['index','view','create','update','delete'],
+                        'actions' => ['index','view','create','update','delete', 'modal'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -63,6 +64,10 @@ class StoreController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new DeviceSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['store_id' => $id]);
+
         return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);

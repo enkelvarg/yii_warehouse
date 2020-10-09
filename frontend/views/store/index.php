@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\StoreSearch */
@@ -33,17 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'name',
                 'format' => 'raw',
-                'value' => function ($model) {
-                    return Html::a($model->name, ['/store/view/', 'id' => $model->id],[
-                       'id' => 'device-view-link',
-                       'title' => Yii::t('yii', 'View Store'),
-                       'data' => [
-                           'target' => '#device-modal',
-                           'toggle' => 'modal',
-                           'backdrop' => 'static',
-                       ]
-                    ]);
-                }
+                'value' => function($model)
+                {
+                    return  Html::button($model->name,['class' => 'btn-link',
+                                'onclick' => 'storeModal("'.Url::to(['store/view']).'", "'.$model->id.'")']);
+                },
             ],
 
             [
@@ -57,27 +52,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
     Modal::begin([
-        'header' => 'Stored Devices',
-        'id' => 'device-modal',
+        'id' => 'storeModal',
         'size' => 'modal-lg',
-    ]);?>
-    <div class="modal-body"></div>
-    <?php
+    ]);
+    echo "<div id='modalContent'></div>";
     Modal::end()
     ?>
 
-    <?php Pjax::end(); ?>
 
-    <?php $this->registerJs(
-        "$('.device-view-link').onclick(function() {
-           
-           function (data) {
-               $('.modal-body').empty(); 
-               $('.modal-body').html(data);
-               $('#device-modal').modal();
-           }
-        );
-        });"
-    ); ?>
+    <?php Pjax::end(); ?>
 
 </div>
