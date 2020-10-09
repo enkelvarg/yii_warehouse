@@ -50,7 +50,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'created_at',
                 'format' => ['date', 'php:D d, M Y']
             ],
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}'],
         ],
     ]); ?>
 
@@ -63,17 +64,18 @@ $this->params['breadcrumbs'][] = $this->title;
     Modal::end()
     ?>
 
+    <?php Pjax::end(); ?>
+
     <?php $this->registerJs(
-        "$('.device-view-link').click(function() {
+        "$('.device-view-link').onclick(function() {
+           
            function (data) {
+               $('.modal-body').empty(); 
                $('.modal-body').html(data);
                $('#device-modal').modal();
-           }  
+           }
         );
         });"
     ); ?>
-
-    <?php Pjax::end(); ?>
-
 
 </div>
