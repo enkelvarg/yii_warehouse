@@ -60,7 +60,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'header' => 'Stored Devices',
         'id' => 'device-modal',
         'size' => 'modal-lg',
-    ]);
+    ]);?>
+    <div class="modal-body"></div>
+    <?php
     Modal::end()
     ?>
 

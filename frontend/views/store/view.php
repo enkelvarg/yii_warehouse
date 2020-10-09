@@ -44,4 +44,9 @@ $this->title = $model->name;
             </div>
         <?php endforeach;?>
     </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" style="background-color: #9acfea;!important;" data-dismiss="modal">Close</button>
+    </div>
 </div>
+
+
